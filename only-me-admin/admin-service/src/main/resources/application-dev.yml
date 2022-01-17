@@ -1,0 +1,16 @@
+server:
+  port: ${SERVER_PORT:8444}
+  servlet:
+    context-path: /admin
+
+
+spring:
+  datasource:
+    url: jdbc:${DATASOURCE_DBTYPE:mysql}://${WK_DATASOURCE_HOST:localhost}:${WK_DATASOURCE_PORT:3306}/${WK_DATASOURCE_CRM:only_me}?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai
+    username: ${WK_DATASOURCE_USERNAME:root}
+    password: ${WK_DATASOURCE_PASSWORD:qwas1234}
+#日志
+logging:
+  level:
+    com.lhh.myspringboot.dao.AdminDao : debug
+
