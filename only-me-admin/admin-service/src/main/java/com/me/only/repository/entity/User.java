@@ -1,9 +1,10 @@
-package com.me.only.entity;
+package com.me.only.repository.entity;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * @program: only-me->User
@@ -12,7 +13,9 @@ import lombok.Data;
  * @create: 2022-01-11 09:05
  **/
 @Data
-@ApiModel("用户啊")
+@Accessors(chain = true)
+@EqualsAndHashCode()
+@TableName("admin_user")
 public class User {
 
     @ApiModelProperty(value = "主键")

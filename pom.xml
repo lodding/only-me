@@ -18,6 +18,7 @@
 
     <modules>
     <module>only-me-admin</module>
+    <module>only-me-common</module>
     </modules>
 
     <properties>
@@ -222,14 +223,13 @@
                 <artifactId>minio</artifactId>
                 <version>${minio.version}</version>
             </dependency>
+            <!--EASY EXCEL JAVA SDK-->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>easyexcel</artifactId>
                 <version>${easyexcel.version}</version>
             </dependency>
-
         </dependencies>
-
     </dependencyManagement>
 
     <build>
