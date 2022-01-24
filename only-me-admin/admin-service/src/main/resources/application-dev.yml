@@ -3,15 +3,14 @@ server:
   servlet:
     context-path: /admin
 
-
 spring:
   application:
     name: w-service-like
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:${DATASOURCE_DBTYPE:mysql}://${WK_DATASOURCE_HOST:localhost}:${WK_DATASOURCE_PORT:3306}/${WK_DATASOURCE_CRM:only_me}?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai
-    username: ${WK_DATASOURCE_USERNAME:root}
-    password: ${WK_DATASOURCE_PASSWORD:qwas1234}
+    url: jdbc:${DATASOURCE_DBTYPE:mysql}://${ATASOURCE_HOST:localhost}:${DATASOURCE_PORT:3306}/${DATASOURCE:wahaha}?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai
+    username: ${DATASOURCE_USERNAME:root}
+    password: ${DATASOURCE_PASSWORD:qwas1234}
 
 # mybatis #  # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
 mybatis-plus:

@@ -1,12 +1,10 @@
-package only.me.common.page;
+package only.me.common.bo;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
@@ -20,31 +18,28 @@ import java.util.stream.Collectors;
  **/
 public class BasePage<T> implements IPage<T> {
     private static final long serialVersionUID = 8545996863226528798L;
-    private List<T> list;
+    private List<T> data;
     private long totalRow;
     private long pageSize;
     private long pageNumber;
-    private List<OrderItem> orders;
     private boolean optimizeCountSql;
     private boolean isSearchCount;
     private Object extraData;
 
     public BasePage() {
-        this.list = new ArrayList();
+        this.data = new ArrayList();
         this.totalRow = 0L;
         this.pageSize = 15L;
         this.pageNumber = 1L;
-        this.orders = new ArrayList();
         this.optimizeCountSql = true;
         this.isSearchCount = true;
     }
 
     public BasePage(PageEntity pageEntity) {
-        this.list = new ArrayList();
+        this.data = new ArrayList();
         this.totalRow = 0L;
         this.pageSize = 15L;
         this.pageNumber = 1L;
-        this.orders = new ArrayList();
         this.optimizeCountSql = true;
         this.isSearchCount = true;
         if (pageEntity.getPage() > 1L) {
@@ -71,11 +66,10 @@ public class BasePage<T> implements IPage<T> {
     }
 
     public BasePage(long current, long size, long total, boolean isSearchCount) {
-        this.list = new ArrayList();
+        this.data = new ArrayList();
         this.totalRow = 0L;
         this.pageSize = 15L;
         this.pageNumber = 1L;
-        this.orders = new ArrayList();
         this.optimizeCountSql = true;
         this.isSearchCount = true;
         if (current > 1L) {
@@ -90,11 +84,11 @@ public class BasePage<T> implements IPage<T> {
     @Override
     @JsonIgnore
     public List<T> getRecords() {
-        return this.list;
+        return this.data;
     }
 
-    public List<T> getList() {
-        return this.list;
+    public List<T> getData() {
+        return this.data;
     }
 
     public long getTotalRow() {
@@ -134,13 +128,13 @@ public class BasePage<T> implements IPage<T> {
         this.pageNumber = pageNumber;
     }
 
-    public void setList(List<T> list) {
-        this.list = list;
+    public void setData(List<T> data) {
+        this.data = data;
     }
 
     @Override
     public BasePage<T> setRecords(List<T> records) {
-        this.list = records;
+        this.data = records;
         return this;
     }
 
@@ -180,14 +174,6 @@ public class BasePage<T> implements IPage<T> {
         return this;
     }
 
-    public BasePage<T> addOrder(OrderItem... items) {
-        this.orders.addAll(Arrays.asList(items));
-        return this;
-    }
-
-    public List<OrderItem> orders() {
-        return this.orders;
-    }
 
     @Override
     public boolean optimizeCountSql() {

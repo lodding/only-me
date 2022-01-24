@@ -1,4 +1,4 @@
-package only.me.common.page;
+package only.me.common.bo;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -91,14 +91,14 @@ public class PageEntity {
     @Override
     public int hashCode() {
         boolean PRIME = true;
-        int result1 = 1;
+        int ResponseUtil1 = 1;
         long $page = this.getPage();
-        int result = result1 * 59 + (int)($page >>> 32 ^ $page);
+        int ResponseUtil = ResponseUtil1 * 59 + (int)($page >>> 32 ^ $page);
         long $limit = this.getLimit();
-        result = result * 59 + (int)($limit >>> 32 ^ $limit);
+        ResponseUtil = ResponseUtil * 59 + (int)($limit >>> 32 ^ $limit);
         Object $pageType = this.getPageType();
-        result = result * 59 + ($pageType == null ? 43 : $pageType.hashCode());
-        return result;
+        ResponseUtil = ResponseUtil * 59 + ($pageType == null ? 43 : $pageType.hashCode());
+        return ResponseUtil;
     }
 
     @Override

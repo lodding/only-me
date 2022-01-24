@@ -1,4 +1,6 @@
-package only.me.common.api;
+package only.me.common.constant;
+
+import only.me.common.api.ResultStatus;
 
 /**
  * @program: only-me->SystemCodeEnum
@@ -6,7 +8,7 @@ package only.me.common.api;
  * @author: szh
  * @create: 2022-01-18 15:20
  **/
-public enum SystemCodeEnum implements IResultCode {
+public enum SystemCodeEnum implements ResultStatus {
     SYSTEM_OK(0, "success"),
     SYSTEM_ERROR(500, "网络错误，请稍候再试"),
     SYSTEM_NOT_LOGIN(302, "请先登录！"),
@@ -21,8 +23,8 @@ public enum SystemCodeEnum implements IResultCode {
     SYSTEM_UPLOAD_FILE_ERROR(1004, "文件上传失败!"),
     SYSTEM_ES_UNSUPPROT_ERROR(1005, "不支持ES服务!");
 
-    final int code;
-    final String msg;
+    final Integer code;
+    final String message;
 
     public static SystemCodeEnum parse(Integer status) {
         SystemCodeEnum[] var1 = values();
@@ -30,7 +32,7 @@ public enum SystemCodeEnum implements IResultCode {
 
         for(int var3 = 0; var3 < var2; ++var3) {
             SystemCodeEnum value = var1[var3];
-            if (value.getCode() == status) {
+            if (value.getCode().equals(status)) {
                 return value;
             }
         }
@@ -38,16 +40,18 @@ public enum SystemCodeEnum implements IResultCode {
         return SYSTEM_ERROR;
     }
 
-    public int getCode() {
+    @Override
+    public Integer getCode() {
         return this.code;
     }
 
-    public String getMsg() {
-        return this.msg;
+    @Override
+    public String getMessage() {
+        return this.message;
     }
 
-    private SystemCodeEnum(final int code, final String msg) {
+    private SystemCodeEnum(final Integer code, final String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 }
