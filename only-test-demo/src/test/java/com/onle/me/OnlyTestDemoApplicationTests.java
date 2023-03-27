@@ -1,10 +1,10 @@
-package only.me.common;
+package com.onle.me;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CommonApplicationTests {
+class OnlyTestDemoApplicationTests {
 
     @Test
     void contextLoads() {

@@ -2,6 +2,7 @@ package only.me.common.bo;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
@@ -174,6 +175,11 @@ public class BasePage<T> implements IPage<T> {
         return this;
     }
 
+
+    @Override
+    public List<OrderItem> orders() {
+        return null;
+    }
 
     @Override
     public boolean optimizeCountSql() {

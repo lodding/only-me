@@ -1,4 +1,5 @@
 server:
   port: 8081
-spring:
+mybatis-plus:
+  mapper-locations: classpath*:com.me.only.repository.mapper/*Mapper.xml
 

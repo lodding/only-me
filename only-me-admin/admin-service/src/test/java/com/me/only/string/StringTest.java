@@ -3,6 +3,7 @@ package com.me.only.string;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -84,6 +85,13 @@ public class StringTest {
     public  void test01(){
         Date date=new Date();
         System.out.printf("客户%s%tF成为你的会员快去看看吧","卧槽无情",date);
+
+    }
+
+    @Test
+    public  void test02(){
+String s = "[]";
+        System.out.println(StringUtils.isNotBlank(s));
 
     }
 }

@@ -6,11 +6,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import only.me.common.bo.Result;
 import only.me.common.util.ResultUtil;
+import only.me.common.util.excelUtil.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * @program: only-me->UserController
@@ -29,6 +30,13 @@ public class UserController {
     @ApiOperation("获取用户")
     public Result<User> getById(@PathVariable("id")Long id){
         return ResultUtil.OK(userService.getById(id));
+    }
+
+    @PostMapping("/test1")
+    public Result<User> excelTest(MultipartFile file){
+        List<User> users = ExcelUtil.readExcel(file, User.class);
+
+        return ResultUtil.OK();
     }
 
 }

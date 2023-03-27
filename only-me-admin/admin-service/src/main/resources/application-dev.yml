@@ -5,12 +5,34 @@ server:
 
 spring:
   application:
-    name: w-service-like
+    name: admin-service
+
+  #数据库链接
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:${DATASOURCE_DBTYPE:mysql}://${ATASOURCE_HOST:localhost}:${DATASOURCE_PORT:3306}/${DATASOURCE:wahaha}?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai
+    url: jdbc:${DATASOURCE_DBTYPE:mysql}://${ATASOURCE_HOST:localhost}:${DATASOURCE_PORT:3306}/${DATASOURCE:only_me_admin}?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull&tinyInt1isBit=false&serverTimezone=Asia/Shanghai
     username: ${DATASOURCE_USERNAME:root}
-    password: ${DATASOURCE_PASSWORD:qwas1234}
+    password: ${DATASOURCE_PASSWORD:szh1234mysql}
+
+
+  #mq
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    #这个配置是保证提供者确保消息推送到交换机中，不管成不成功，都会回调
+    publisher-confirm-type: correlated
+    #保证交换机能把消息推送到队列中
+    publisher-returns: true
+    virtual-host: /
+    #这个配置是保证消费者会消费消息，手动确认
+    listener:
+      simple:
+        acknowledge-mode: manual
+    template:
+      mandatory: true
+
 
 # mybatis #  # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
 mybatis-plus:
