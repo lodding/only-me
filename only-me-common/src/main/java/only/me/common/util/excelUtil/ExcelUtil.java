@@ -1,11 +1,14 @@
 package only.me.common.util.excelUtil;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.support.ExcelTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import only.me.common.Exception.BusinessException;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.sound.midi.Patch;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -87,6 +90,21 @@ public class ExcelUtil {
                 sheetMap.put(clazzItem.getName(), objectList);
             }
         }
+
         return sheetMap;
     }
+
+    /**
+     * 导出
+     * @param clazz
+     * @param fileNme
+     * @param sheetName
+     * @param data
+     */
+    public void exportExcel(Class<T> clazz, String fileNme,String sheetName,List<T> data){
+        EasyExcel.write(fileNme,clazz).sheet(sheetName).doWrite(data);
+    }
+
+
+
 }
