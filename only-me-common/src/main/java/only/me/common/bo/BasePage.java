@@ -1,6 +1,5 @@
 package only.me.common.bo;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,8 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+
 
 /**
  * @program: only-me->BasePage
@@ -201,7 +199,7 @@ public class BasePage<T> implements IPage<T> {
         return this;
     }
 
-    public <R> BasePage<R> copy(Class<R> clazz) {
+/*    public <R> BasePage<R> copy(Class<R> clazz) {
         return this.copy(clazz, (obj) -> {
             return BeanUtil.copyProperties(obj, clazz, new String[0]);
         });
@@ -211,7 +209,7 @@ public class BasePage<T> implements IPage<T> {
         BasePage<R> basePage = new BasePage(this.getCurrent(), this.getSize(), this.getTotal(), this.isSearchCount());
         basePage.setRecords((List)this.getRecords().stream().map(mapper).collect(Collectors.toList()));
         return basePage;
-    }
+    }*/
 
     @Override
     @JsonIgnore

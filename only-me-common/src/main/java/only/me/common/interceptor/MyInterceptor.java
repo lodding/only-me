@@ -64,7 +64,7 @@ public class MyInterceptor implements HandlerInterceptor {
                            Object handler,
                            ModelAndView modelAndView) throws Exception {
         System.out.println("MyInterceptor 运行 Controller 某个方法时，方法抛出异常将不进入此方法");
-        long start = (long) request.getAttribute("startTime");
+        long start = (Long) request.getAttribute("startTime");
         System.out.println("MyInterceptor 处理时长为：" + (System.currentTimeMillis() - start));
     }
 
@@ -78,7 +78,7 @@ public class MyInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
         System.out.println("TimeInterceptor 完成 Controller 某个方法");
-        long start = (long) request.getAttribute("startTime");
+        long start = (Long) request.getAttribute("startTime");
         System.out.println("TimeInterceptor 处理时长为：" + (System.currentTimeMillis() - start));
         System.out.println(">>>MyInterceptor1>>>>>>>在整个请求结束之后被调用，也就是在DispatcherServlet 渲染了对应的视图之后执行（主要是用于进行资源清理工作）");
 

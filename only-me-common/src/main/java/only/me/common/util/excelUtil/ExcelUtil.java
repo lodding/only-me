@@ -54,7 +54,7 @@ public class ExcelUtil {
     /**
      * 多sheet读取时的模型映射
      */
-    private static final Map<String, Integer> brandModelMap = new HashMap<>();
+    private static final Map<String, Integer> brandModelMap = new HashMap<String, Integer>();
     static {
         brandModelMap.put(Class.class.getName(), 0);
         brandModelMap.put(Class.class.getName(),1);
@@ -80,7 +80,7 @@ public class ExcelUtil {
      * @return
      */
     public static Map<String, List<Object>> readExcelBrandModel(MultipartFile excel, Class<?>... clazz) {
-        Map<String, List<Object>> sheetMap = new HashMap<>();
+        Map<String, List<Object>> sheetMap = new HashMap<String, List<Object>>();
         if (clazz != null && clazz.length > 0) {
             for (Class clazzItem : clazz) {
                 ExcelListener excelListener = new ExcelListener();

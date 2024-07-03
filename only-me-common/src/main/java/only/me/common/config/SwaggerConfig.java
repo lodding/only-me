@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -45,30 +46,13 @@ public class SwaggerConfig {
      */
     @Bean
     public Docket createRestApi() {
-        Predicate<RequestHandler> predicate = new Predicate<RequestHandler>() {
-            @Override
-            public boolean apply(RequestHandler input) {
-                Class<?> declaringClass = input.declaringClass();
-                // 排除
-                if (declaringClass == BasicErrorController.class) {
-                    return false;
-                }
-                // 被注解的类
-                if (declaringClass.isAnnotationPresent(RestController.class)) {
-                    return true;
-                }
-                // 被注解的方法
-                if (input.isAnnotatedWith(ResponseBody.class)) {
-                    return true;
-                }
-                return false;
-            }
-        };
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .useDefaultResponseMessages(false)
                 .select()
-                .apis(predicate)
+                // 只包含带有 @RestController 注解的类中的请求处理器
+                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .build();
     }
 
@@ -78,12 +62,12 @@ public class SwaggerConfig {
                 //大标题
                 .title("swagger documentation")
                 //详细描述
-                .description("swagger REST API, all the applications could access the Object model data via JSON.")
+                .description("only me swagger")
                 //版本
                 .version("1.0")
                 .termsOfServiceUrl("NO terms of service")
                 //作者
-                .contact(new Contact("哇哈哈", "www.baidu.com.com", "1612150596@qq.com"))
+                .contact(new Contact("哇哈哈", "www.baidu.com", "1612150596@qq.com"))
                 .license("The Apache License, Version 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
                 .build();

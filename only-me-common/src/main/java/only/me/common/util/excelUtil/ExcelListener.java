@@ -23,7 +23,7 @@ public class ExcelListener<T> extends AnalysisEventListener<T> {
     /**
      * 用于保存数据
      */
-    private List<T> datas = Collections.synchronizedList(new ArrayList<>());
+    private List<T> datas = (List<T>) Collections.synchronizedList(new ArrayList<>());
 
     /**
      * 读取的每行数据  这个每一条数据解析都会来调用
