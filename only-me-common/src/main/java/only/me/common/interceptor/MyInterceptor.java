@@ -26,9 +26,7 @@ public class MyInterceptor implements HandlerInterceptor {
      * 返回值：true表示继续流程；false表示流程中断，不会继续调用其他的拦截器或处理器
      */
     @Override
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response,
-                             Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("执行拦截器");
         if (handler instanceof HandlerMethod) {
             String key = request.getParameter("key");

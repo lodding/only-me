@@ -1,9 +1,9 @@
-package com.me.only.config.redis;
+package only.me.common.util.redis;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,21 +15,32 @@ import java.util.concurrent.TimeUnit;
  * @author peiqi
  */
 @Component
-public class RedisSessionLock {
-    private static final Logger log = LoggerFactory.getLogger(RedisSessionLock.class);
+public class RedisLockUtil {
+    private static final Logger log = LoggerFactory.getLogger(RedisLockUtil.class);
     private final RedissonClient redissonClient;
     private final int leaseTime;
 
     @Autowired
-    public RedisSessionLock(RedissonClient redissonClient) {
+    public RedisLockUtil(RedissonClient redissonClient) {
         this.redissonClient = redissonClient;
         // 默认租约时间，可以根据需要修改
         this.leaseTime = 10;
     }
 
+    /**
+     * 获取锁 默认等待时间10s
+     *
+     * @param lockKey
+     * @return
+     */
     public boolean acquireLock(String lockKey) {
         RLock lock = redissonClient.getLock(lockKey);
-        return lock.tryLock();
+        try {
+            return lock.tryLock(0,leaseTime, TimeUnit.SECONDS);
+        }catch (InterruptedException e){
+            log.error("redis 释放锁失败", e);
+            return false;
+        }
     }
 
     /**
@@ -45,7 +56,16 @@ public class RedisSessionLock {
         try {
             return lock.tryLock(waitTime, leaseTime, unit);
         } catch (InterruptedException e) {
-            log.error("redis 获取锁失败", e);
+            log.error("redis 释放锁失败", e);
+            return false;
+        }
+    }
+    public boolean acquireLock(String lockKey, int waitTime, int leaseTime , TimeUnit unit) {
+        RLock lock = redissonClient.getLock(lockKey);
+        try {
+            return lock.tryLock(waitTime, leaseTime, unit);
+        } catch (InterruptedException e) {
+            log.error("redis 释放锁失败", e);
             return false;
         }
     }

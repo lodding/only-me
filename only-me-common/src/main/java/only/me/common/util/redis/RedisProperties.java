@@ -1,4 +1,4 @@
-package com.me.only.config.redis;
+package only.me.common.util.redis;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

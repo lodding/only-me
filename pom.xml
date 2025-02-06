@@ -7,7 +7,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.5.6</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>com.me.only</groupId>
@@ -17,8 +17,8 @@
     <packaging>pom</packaging>
 
     <modules>
-    <module>only-me-admin</module>
-    <module>only-me-common</module>
+        <module>only-me-common</module>
+        <module>only-me-admin</module>
     </modules>
 
     <properties>
@@ -48,6 +48,11 @@
         <easyexcel.version>2.1.6</easyexcel.version>
         <poi.version>3.17</poi.version>
         <mq.version>1.5.2.RELEASE</mq.version>
+        <redisson.version>3.15.4</redisson.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <oos.version>3.10.2</oos.version>
+        <jetbrains.annotations.version>1.7.0</jetbrains.annotations.version>
+        <caffeine.version>3.0.5</caffeine.version>
     </properties>
 
     <dependencies>
@@ -55,10 +60,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+        <!--提供了生产级别的监控和管理功能-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <!--支持面向切面编程-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
@@ -72,28 +79,34 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <!--用于生成配置元数据，帮助 IDE 提供配置提示-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!--redis依赖配置-->
+        <!--Spring Boot 对 Redis 的集成依赖。-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!--Hibernate Validator 校验-->
+        <!--Spring Boot 对 Hibernate Validator 的集成依赖 提供数据验证功能，用于验证用户输入的数据-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.realityforge.org.jetbrains.annotations/org.jetbrains.annotations -->
+        <!-- 提供了 JetBrains 的注解，用于代码静态分析和 IDE 提示 -->
         <dependency>
             <groupId>org.realityforge.org.jetbrains.annotations</groupId>
             <artifactId>org.jetbrains.annotations</artifactId>
-            <version>1.7.0</version>
+            <version>${jetbrains.annotations.version}</version>
         </dependency>
 
 
@@ -104,49 +117,54 @@
             <optional>true</optional>
         </dependency>
 
+        <!--MySQL 数据库的 JDBC 驱动-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
         </dependency>
 
+        <!--Spring Boot 对 JDBC 的集成依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
-        <!--集成druid连接池-->
+        <!--阿里巴巴的 Druid 数据库连接池的 Spring Boot 集成-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid.version}</version>
         </dependency>
 
+        <!--Hutool 是一个 Java 工具包，提供了丰富的工具类-->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.all.version}</version>
         </dependency>
 
+        <!-- Apache Commons Codec 提供了各种编码和解码工具 -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
 
-        <!-- apq 工具类 -->
+        <!-- Apache Commons Lang 提供了 Java 标准库的扩展功能 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
 
+        <!--Apache Commons IO 提供了文件和流操作的工具类-->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
         </dependency>
 
-        <!--统一Guava版本防止冲突-->
+        <!--Google Guava 是一个强大的 Java 工具库，提供了集合、并发、缓存等功能。-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -158,6 +176,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
         <!--Swagger-UI API文档生产工具-->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -184,21 +203,41 @@
             <version>${swagger-annotations.version}</version>
         </dependency>
 
+        <!--Apache Velocity 是一个模板引擎用于生成动态内容，如邮件模板、报表等-->
+
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
             <version>2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis.plus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <version>${mybatis.plus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis.plus.version}</version>
         </dependency>
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
 
-            <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
+            <!-- 用于 JSON 数据的序列化和反序列化-->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.83</version>
+                <version>${fastjson.version}</version>
             </dependency>
 
             <dependency>
@@ -207,23 +246,18 @@
                 <version>${mybatis.plus.version}</version>
             </dependency>
 
-            <!--JWT(Json Web Token)登录支持-->
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt</artifactId>
-                <version>${jjwt.version}</version>
-            </dependency>
-            <!-- 阿里云OSS -->
+            <!-- 阿里云对象存储服务（OSS）的 Java SDK。 -->
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${aliyun-oss.version}</version>
+                <version>${oos.version}</version>
             </dependency>
 
+            <!--用于发送 HTTP 请求，处理网络通信。-->
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
-                <version>3.10.0</version>
+                <version>4.4.1</version>
             </dependency>
             <dependency>
                 <groupId>com.squareup.okio</groupId>
@@ -238,16 +272,17 @@
                 <version>${easyexcel.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.houbb</groupId>
-                <artifactId>sensitive-word</artifactId>
-                <version>0.8.0</version>
+                <groupId>com.only.me</groupId>
+                <artifactId>only-me-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
-        </dependencies>
 
+        </dependencies>
     </dependencyManagement>
 
     <build>
         <resources>
+            <!-- 配置资源文件的处理方式，包括 src/main/java 下的 XML 文件和 src/main/resources 下的所有文件 -->
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
@@ -264,16 +299,18 @@
             </resource>
         </resources>
         <plugins>
+            <!-- 用于打包 Spring Boot 应用 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- 配置 Java 编译器的版本 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>6</source>
-                    <target>6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>

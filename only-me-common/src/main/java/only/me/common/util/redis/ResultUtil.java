@@ -1,4 +1,4 @@
-package only.me.common.util;
+package only.me.common.util.redis;
 
 import only.me.common.Exception.BusinessException;
 import only.me.common.bo.Result;

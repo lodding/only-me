@@ -1,18 +1,19 @@
-package com.me.only.config.redis;
+package only.me.common.util.redis;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Resource;
 
 /**
  * @author peiqi
  */
 @Configuration
 public class RedissonConfig {
-    @Autowired
+    @Resource
     private RedisProperties redisProperties;
 
     @Bean(destroyMethod = "shutdown")
