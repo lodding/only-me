@@ -10,14 +10,17 @@
     </parent>
 
     <artifactId>admin-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>admin-service</name>
-    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.only.me</groupId>
             <artifactId>only-me-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.only.me</groupId>
+            <artifactId>admin-api</artifactId>
         </dependency>
 
         <dependency>

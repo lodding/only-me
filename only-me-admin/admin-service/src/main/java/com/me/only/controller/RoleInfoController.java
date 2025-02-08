@@ -1,14 +1,10 @@
 package com.me.only.controller;
 
 
-import com.me.only.repository.entity.UserInfoEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 /**
  * <p>
@@ -22,7 +18,7 @@ import java.util.List;
 @RequestMapping("/role-info")
 public class RoleInfoController {
 
-    public void  excelTest(@RequestBody MultipartFile field){
+    public void excelTest(@RequestBody MultipartFile field) {
     }
 
 }

@@ -12,17 +12,12 @@
     <groupId>com.only.me</groupId>
     <artifactId>admin-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>admin-api</name>
 
-    <packaging>jar</packaging>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
+    <dependencies>
+        <!-- 远程调用HTTP客户端 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+    </dependencies>
 </project>

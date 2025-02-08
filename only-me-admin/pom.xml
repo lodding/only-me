@@ -9,13 +9,12 @@
     </parent>
 
     <artifactId>only-me-admin</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>only-me-admin</name>
     <packaging>pom</packaging>
 
     <modules>
-        <module>admin-service</module>
         <module>admin-api</module>
+        <module>admin-service</module>
     </modules>
+
 
 </project>
